@@ -1,7 +1,28 @@
-function createOrder(order) {
-  if (!order || !order.pizzaId || !order.address)
+const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient();
+
+function createOrder(request) {
+  if (!request || !request.pizzaId || !request.address)
     throw new Error('To order pizza please provide type and address');
-  return {};
+  return docClient
+    .put({
+      TableName: 'pizza-orders',
+      Item: {
+        orderId: 'some-id',
+        pizza: request.pizza,
+        address: request.address,
+        orderStatus: 'pending',
+      },
+    })
+    .promise()
+    .then(res => {
+      console.log('Order is saved :', res);
+      return res;
+    })
+    .catch(savedError => {
+      console.log('Error', savedError);
+      throw savedError;
+    });
 }
 
 module.exports = createOrder;
