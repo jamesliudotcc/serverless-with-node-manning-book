@@ -12,8 +12,5 @@ function getOrders(orderId) {
     .get({ TableName: 'pizza-orders', Key: { orderId } })
     .promise()
     .then(result => result.Item);
-
-  if (!order) throw new Error('To delete an order, provide an order ID');
-  return {};
 }
 module.exports = getOrders;
