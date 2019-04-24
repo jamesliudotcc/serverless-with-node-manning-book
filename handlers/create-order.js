@@ -10,7 +10,7 @@ function createOrder(request) {
       TableName: 'pizza-orders',
       Item: {
         orderId: uuid(),
-        pizza: request.pizza,
+        pizza: request.pizzaId,
         address: request.address,
         orderStatus: 'pending',
       },

@@ -39,21 +39,21 @@ api.post(
   request => {
     return orderPizza(request.body);
   },
-  { success: 201, error: 400 }
+  { error: 400 }
 );
 api.put(
   '/orders/{id}',
   request => {
-    return updatePizza({ id: request.pathParams.id, old: request.body });
+    return updatePizza(request.pathParams.id, request.body);
   },
-  { success: 201, error: 400 }
+  { error: 400 }
 );
 api.delete(
   '/orders/{id}',
   request => {
     return deleteOrder(request.pathParams.id);
   },
-  { success: 201, error: 400 }
+  { error: 400 }
 );
 
 module.exports = api;
