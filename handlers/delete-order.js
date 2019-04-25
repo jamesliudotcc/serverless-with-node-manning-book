@@ -6,6 +6,11 @@ function deleteOrder(orderId) {
     .delete({
       TableName: 'pizza-orders',
       Key: { orderId },
+      ConditionExpression: 'orderStatus=:pending',
+      ExpressionAttributeValues: {
+        ':pending': 'pending',
+      },
+      ReturnValues: 'ALL_OLD',
     })
     .promise()
     .then(result => result.Item);

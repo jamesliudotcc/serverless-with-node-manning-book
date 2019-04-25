@@ -6,18 +6,16 @@ function updateOrder(orderId, request) {
     .update({
       TableName: 'pizza-orders',
       Key: { orderId },
+      ConditionExpression: 'orderStatus=:pending',
       UpdateExpression: `set pizza = :p , address= :a`,
       ExpressionAttributeValues: {
         ':p': request.pizzaId,
         ':a': request.address,
+        ':pending': 'pending',
       },
+      ReturnValues: 'ALL_NEW',
     })
     .promise()
-    .then(result => result.Item);
-  if (!order.id || !order.old.pizzaId || !order.old.address)
-    throw new Error(
-      'To update an order, provide an order ID and a new order, including a type and address'
-    );
-  return {};
+    .then(result => result.Attributes);
 }
 module.exports = updateOrder;
