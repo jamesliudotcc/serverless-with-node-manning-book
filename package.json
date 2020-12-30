@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.441.0",
+    "aws-sdk": "^2.819.0",
     "claudia-api-builder": "^4.1.2",
     "uuid": "^3.3.2"
   }
